@@ -1,0 +1,20 @@
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.oracle.shop.user.User" table="user">
+		<id name="uid" column="uid" type="java.lang.Integer">
+			<generator class="native"></generator>
+		</id>
+		<!-- 普通熟悉 -->
+		<property name="username" column="username" type="string"></property>
+		<property name="password" column="password" type="string"></property>
+		<property name="name" column="name" type="string"></property>
+		<property name="email" column="email" type="string"></property>
+		<property name="phone" column="phone" type="string"></property>
+		<property name="addr" column="addr" type="string"></property>
+		<property name="sex" column="sex" type="string"></property>
+		<property name="status" column="status" type="java.lang.Integer"></property>
+		<property name="code" column="code" type="string"></property>
+	</class>
+</hibernate-mapping>

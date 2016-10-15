@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+	<package name="default" namespace="/" extends="struts-default">
+		<!-- 首页的配置 -->
+		<action name="indexAction" class="indexAction">
+			<result name="index">/WEB-INF/jsp/index.jsp</result>
+		</action>
+		<!-- user操作的界面 -->
+		<action name="user_*" class="userAcion" method="{1}">
+           <result name="registerPage">/WEB-INF/jsp/regist.jsp</result>
+		</action>
+	</package>
+</struts>
