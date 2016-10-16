@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0080)http://localhost:8080/mango/login.jhtml?redirectUrl=%2Fmango%2Fcart%2Flist.jhtml -->
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -5,10 +7,16 @@
 <title>会员登录</title>
 <meta name="author" content="Mango Team">
 <meta name="copyright" content="Mango">
-<link href="./css/common.css" rel="stylesheet" type="text/css">
-<link href="./css/login.css" rel="stylesheet" type="text/css">
-
-
+<link href="${pageContext.request.contextPath}/css/common.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/css/login.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/errorcss.css">
+<script src="${pageContext.request.contextPath}/js/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-2.1.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.validate.js"></script> 
+<script src="${pageContext.request.contextPath}/js/loginValidation.js"></script>
+<script src="${pageContext.request.contextPath}/js/messages_zh.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-form.js"></script>
 </head>
 <body>
 
@@ -16,13 +24,13 @@
 	<div class="span5">
 		<div class="logo">
 			<a href="http://localhost:8080/mango/">
-				<img src="./image/r___________renleipic_01/logo.gif" alt="传智播客">
+				<img src="${pageContext.request.contextPath}/image/r___________renleipic_01/logo.gif" alt="传智播客">
 			</a>
 		</div>
 	</div>
 	<div class="span9">
 <div class="headerAd">
-					<img src="./image/header.jpg" width="320" height="50" alt="正品保障" title="正品保障">
+					<img src="${pageContext.request.contextPath}/image/header.jpg" width="320" height="50" alt="正品保障" title="正品保障">
 </div>	</div>
 	<div class="span10 last">
 		<div class="topNav clearfix">
@@ -126,22 +134,22 @@
 </div>	<div class="container login">
 		<div class="span12">
 <div class="ad">
-					<img src="./image/login.jpg" width="500" height="330" alt="会员登录" title="会员登录">
+					<img src="${pageContext.request.contextPath}/image/login.jpg" width="500" height="330" alt="会员登录" title="会员登录">
 </div>		</div>
 		<div class="span12 last">
 			<div class="wrap">
 				<div class="main">
 					<div class="title">
-						<strong>会员登录</strong>USER LOGIN
+						<strong>会员登录</strong>USER LOGIN <span style="color: red;">${loginresult}</span>
 					</div>
-					<form id="loginForm"  method="post" novalidate="novalidate">
+					<form id="loginForm"  method="post" novalidate="novalidate" action="${pageContext.request.contextPath}/user_login.action">
 						<table>
 							<tbody><tr>
 								<th>
 										用户名/E-mail:
 								</th>
 								<td>
-									<input type="text" id="username" name="username" class="text" maxlength="20">
+									<input type="text" id="username" name="username" class="text" maxlength="20"><span><s:fielderror fieldName="username"></s:fielderror></span>
 								</td>
 							</tr>
 							<tr>
@@ -150,6 +158,7 @@
 								</th>
 								<td>
 									<input type="password" id="password" name="password" class="text" maxlength="20" autocomplete="off">
+									<span><s:fielderror fieldName="password"></s:fielderror></span>
 								</td>
 							</tr>
 								<tr>
@@ -158,7 +167,7 @@
 									</th>
 									<td>
 										<span class="fieldSet">
-											<input type="text" id="captcha" name="captcha" class="text captcha" maxlength="4" autocomplete="off"><img id="captchaImage" class="captchaImage" src="./image/captcha.jhtml" title="点击更换验证码">
+											<input type="text" id="captcha" name="captcha" class="text captcha" maxlength="4" autocomplete="off"><img id="captchaImage" class="captchaImage" src="${pageContext.request.contextPath}/image/captcha.jhtml" title="点击更换验证码">
 										</span>
 									</td>
 								</tr>
@@ -205,7 +214,7 @@
 	</div>
 <div class="container footer">
 	<div class="span24">
-	  <div class="footerAd"><img src="./image/footer.jpg" width="950" height="52" alt="我们的优势" title="我们的优势" /></div>	
+	  <div class="footerAd"><img src="${pageContext.request.contextPath}/image/footer.jpg" width="950" height="52" alt="我们的优势" title="我们的优势" /></div>	
 	</div>
 	<div class="span24">
 		<ul class="bottomNav">

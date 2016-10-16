@@ -1,5 +1,6 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -26,16 +27,19 @@
 	<div class="span10 last">
 		<div class="topNav clearfix">
 			<ul>
-				<li id="headerLogin" class="headerLogin" style="display: list-item;">
-					<a href="./会员登录.htm">登录</a>|
+			<c:if test="${username==null}">
+			<li id="headerLogin" class="headerLogin" style="display: list-item;">
+					<a href="${pageContext.request.contextPath}/user/user_loginPage.action">登录</a>|
 				</li>
 				<li id="headerRegister" class="headerRegister" style="display: list-item;">
 					<a href="${pageContext.request.contextPath}/user/user_registerPage.action">注册</a>|
 				</li>
-				<li id="headerUsername" class="headerUsername"></li>
-				<li id="headerLogout" class="headerLogout">
-					<a>[退出]</a>|
+			</c:if>
+			<c:if test="${username!=null}">
+			  <li id="headerUesename" class="headerUesename" style="display: list-item;">
+					<span>${sessionScope.username}|<a href="${pageContext.request.contextPath}/user/user_logout.action">[退出]</a></span>
 				</li>
+			</c:if>
 						<li>
 							<a>会员中心</a>
 							|

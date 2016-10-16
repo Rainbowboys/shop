@@ -791,7 +791,7 @@ div.header .topNav li a {
 	margin: 0px 6px;
 }
 
-div.header .headerLogin, div.header .headerRegister, div.header .headerUsername, div.header .headerLogout {
+div.header .headerLogin, div.header .headerRegister, div.header .headerUesename, div.header .headerLogout {
 	display: none;
 }
 

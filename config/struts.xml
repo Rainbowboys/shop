@@ -13,7 +13,13 @@
 		</action>
 		<!-- user操作的界面 -->
 		<action name="user_*" class="userAcion" method="{1}">
-           <result name="registerPage">/WEB-INF/jsp/regist.jsp</result>
+			<result name="registerPage">/WEB-INF/jsp/regist.jsp</result>
+			<result name="registInput">/WEB-INF/jsp/regist.jsp</result>
+			<result name="registresult">/WEB-INF/jsp/msg.jsp</result>
+			<result name="activeresult">/WEB-INF/jsp/msgactive.jsp</result>
+			<result name="loginPage">/WEB-INF/jsp/login.jsp</result>
+			<result name="loginInput">/WEB-INF/jsp/login.jsp</result>
+			<result name="loginsuccess">/WEB-INF/jsp/index.jsp</result>
 		</action>
 	</package>
 </struts>
