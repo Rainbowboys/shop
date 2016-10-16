@@ -1,10 +1,16 @@
 package com.oracle.shop.user;
 
-import javax.annotation.Resource;
+import java.io.PrintWriter;
+import java.util.Map;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.alibaba.fastjson.JSON;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -31,6 +37,13 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		return user;
 	}
 
+	// 后台验证码
+	private String captcha;
+
+	public void setCaptcha(String captcha) {
+		this.captcha = captcha;
+	}
+
 	/**
 	 * 跳转用户注册界面的方法
 	 * 
@@ -53,13 +66,43 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 	 */
 	@InputConfig(resultName = "registInput")
 	public String regist() {
-		boolean result = userservice.regist(user);
-		if (result) {
-			ActionContext.getContext().put("registresult", "注册成功!请到邮箱进行激活");
+		String checkcode = ServletActionContext.getRequest().getSession().getAttribute("checkcode").toString();
+		if (captcha != null && captcha.equals(checkcode)) {
+
+			boolean result = userservice.regist(user);
+			if (result) {
+				ActionContext.getContext().put("registresult", "注册成功!请到邮箱进行激活");
+			} else {
+				ActionContext.getContext().put("registresult", "注册失败!");
+			}
+			return "registresult";
 		} else {
-			ActionContext.getContext().put("registresult", "注册失败!");
+			this.addActionError("验证码错误");
+			return "registInput";
 		}
-		return "registresult";
+	}
+
+	/**
+	 * 用户名检测
+	 * 
+	 * @throws Exception
+	 */
+	public void registcheck() throws Exception {
+		User userexsit = userservice.findUserByUserName(user.getUsername());
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setCharacterEncoding("utf-8");
+		PrintWriter writer = response.getWriter();
+		// 提示信息
+		String msg = "";
+		if (userexsit != null) {
+			// 用户已存在
+			msg = "该用户已经存在";
+			writer.write(JSON.toJSONString(msg));
+		} else {
+			writer.write(JSON.toJSONString(msg));
+		}
+		writer.close();
+		writer.flush();
 	}
 
 	/**
@@ -101,6 +144,18 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 			ActionContext.getContext().put("activeresult", "激活失败！激活码有误");
 		}
 		return "activeresult";
+	}
+
+	/**
+	 * 用户注销
+	 */
+
+	public String logout() {
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		if (session.get(Contains.SESSION_USER_NAME) != null) {
+			session.remove(Contains.SESSION_USER_NAME);
+		}
+		return "quitSuccess";
 
 	}
 }

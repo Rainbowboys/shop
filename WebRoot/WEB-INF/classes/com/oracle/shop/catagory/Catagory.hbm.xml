@@ -1,0 +1,21 @@
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.oracle.shop.catagory.Catagory" table="catagory">
+		<id name="cid" column="cid" type="java.lang.Integer">
+			<generator class="native"></generator>
+		</id>
+		<!-- 普通属性-->
+		<property name="cname" column="cname" type="string"></property>
+		
+		<!-- 二级分类 -->
+		<!-- name:对象属性名 -->
+		<set name="categorySecond" table="categorySecond" cascade="save-update,delete" lazy="false" order-by="csid">
+			<!-- key:表示 一对多 多的一方的外键的名称 -->
+			<key column="cid"></key>
+			<one-to-many class="com.oracle.shop.categorysecond.CategorySecond" />
+		</set>
+		
+	</class>
+</hibernate-mapping>

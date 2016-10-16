@@ -51,7 +51,7 @@ div.register th {
 
 div.register .captcha {
 	width: 130px;
-	text-transform: uppercase;
+	/* text-transform: uppercase; */
 	ime-mode: disabled;
 }
 

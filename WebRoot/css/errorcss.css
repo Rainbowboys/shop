@@ -1,3 +1,6 @@
 .error {
     padding-right: 1em; vertical-align: top; color: red;margin-left: 10px;
 }
+.loginerror {
+    padding-right: 1em; vertical-align: top; color: red;
+}

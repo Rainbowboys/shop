@@ -17,8 +17,7 @@ $(function() {
 	}, "密码格式错误");
 
 	$("#loginForm").validate({
-		errorElement : 'label',
-		errorClass : 'error',
+	
 		focusInvalid : false,
 		rules : {
 			username : {
@@ -30,6 +29,10 @@ $(function() {
 			password : {
 				required : true,
 				password : true
+			},
+			checkcode : {
+				required : true,
+				equalTo : "#rightcheckcode"
 			}
 		},
 		messages : {
@@ -40,6 +43,10 @@ $(function() {
 			},
 			password : {
 				required : "密码不能为空"
+			},
+			checkcode : {
+				required : "验证码错误",
+				equalTo : "验证码错误"
 			}
 		}
 	})

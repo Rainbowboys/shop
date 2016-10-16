@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@ taglib uri="/struts-tags"  prefix="s"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -11,100 +11,75 @@
 <link href="${pageContext.request.contextPath}/css/register.css"
 	rel="stylesheet" type="text/css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/errorcss.css">
+	href="${pageContext.request.contextPath}/css/errorcss.css"></link>
 <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery-2.1.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery.validate.js"></script> 
-<script src="${pageContext.request.contextPath}/js/myValidate.js"></script>
+ <script src="${pageContext.request.contextPath}/js/myValidate.js"></script> 
 <script src="${pageContext.request.contextPath}/js/messages_zh.min.js"></script>
  <script src="${pageContext.request.contextPath}/js/jquery-form.js"></script>
- <%--  <script type="text/javascript">
+<%--   <script type="text/javascript">
         $(function () {
             var options = {
                 url : '${pageContext.request.contextPath}/user_regist.action',
                 type : 'POST',
                 dataType : "json",
                 clearForm : false,
+                success:function(){
+                	window.location.href=''
+                }
                 
             }
             $("#registerForm").ajaxForm(options);
         })
     </script> --%>
+    
+    <script type="text/javascript">
+      $(function() {
+    	  $('#username').on("blur",function(){
+    		  var username=$(this).val();
+    		  $.ajax({
+    			  url : '${pageContext.request.contextPath}/user_registcheck.action', 
+    			  type : 'POST',
+    			  dataType : "json",
+    			  data:{
+    				  username:username
+    			  },
+    			  success:function(data){
+    				  $("#usernameerror").html(data);
+    			  }
+    		  })
+    	  })
+	})
+    </script>
+   <!--点击切换验证码  -->
+<script type="text/javascript">
+
+$(function () {
+	 $("#captchaImage").on("click",function(){
+		 $(this)[0].src="${pageContext.request.contextPath}/checkImgAction.action?"+new Date().getTime(); 
+	})
+	
+	$("#captcha").on("blur",function(){
+		getcode();
+		
+	})
+})
+	  
+	  function getcode(){
+		  $.ajax({
+			  url:"${pageContext.request.contextPath}/getCheckCode.action",
+			  type : 'POST',
+			  dataType : "json",
+			  success:function(data){
+				  $("#rightcheckcode").val(data);
+			  }
+		  })
+	  }
+</script>    
 </head>
 <body>
-	<div class="container header">
-		<div class="span5">
-			<div class="logo">
-				<a href="http://localhost:8080/mango/"> <img
-					src="${pageContext.request.contextPath}/image/r___________renleipic_01/logo.gif"
-					alt="传智播客"></a>
-			</div>
-		</div>
-		<div class="span9">
-			<div class="headerAd">
-				<img src="${pageContext.request.contextPath}/image/header.jpg"
-					width="320" height="50" alt="正品保障" title="正品保障">
-			</div>
-		</div>
-		<div class="span10 last">
-			<div class="topNav clearfix">
-				<ul>
-					<li id="headerLogin" class="headerLogin"
-						style="display: list-item;"><a href="./会员登录.htm">登录</a>|</li>
-					<li id="headerRegister" class="headerRegister"
-						style="display: list-item;"><a href="./会员注册.htm">注册</a>|</li>
-					<li id="headerUsername" class="headerUsername"></li>
-					<li id="headerLogout" class="headerLogout"><a
-						href="./index.htm">[退出]</a>|</li>
-					<li><a>会员中心</a> |</li>
-					<li><a>购物指南</a> |</li>
-					<li><a>关于我们</a></li>
-				</ul>
-			</div>
-			<div class="cart">
-				<a href="./购物车.htm">购物车</a>
-			</div>
-			<div class="phone">
-				客服热线: <strong>96008/53277764</strong>
-			</div>
-		</div>
-		<div class="span24">
-			<ul class="mainNav">
-				<li><a href="./index.htm">首页</a> |</li>
-				<li><a href="./蔬菜分类.htm">定制套餐</a> |</li>
-				<li><a>安全频道</a> |</li>
-				<li><a>亿家卡</a> |</li>
-				<li><a>蔬菜基地</a> |</li>
-				<li><a>节气养生</a> |</li>
-				<li><a>便民服务</a> |</li>
-
-			</ul>
-		</div>
-		<div class="span24">
-			<div class="tagWrap">
-				<ul class="tag">
-					<li class="icon"
-						style="background: url(http://storage.shopxx.net/demo-image/3.0/tag/hot.gif) right no-repeat;">
-						<a>热销</a>
-					</li>
-					<li class="icon"
-						style="background: url(http://storage.shopxx.net/demo-image/3.0/tag/new.gif) right no-repeat;">
-						<a>最新</a>
-					</li>
-				</ul>
-				<div class="hotSearch">
-					热门搜索: <a>水蜜桃</a> <a>西瓜</a> <a>紫薯</a> <a>大米</a> <a>玉米</a> <a>茄子</a>
-					<a>辣椒</a> <a>圣女果</a> <a>鱿鱼丝</a>
-				</div>
-				<div class="search">
-					<form id="productSearchForm" method="get">
-						<input name="keyword" class="keyword" value="商品搜索" maxlength="30">
-							<button type="submit">搜索</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+	<%@ include file="./header.jsp" %>
 	<div class="container register">
 		<div class="span24">
 			<div class="wrap">
@@ -118,7 +93,9 @@
 								<tr>
 									<th><span class="requiredField">*</span>用户名:</th>
 									<td><input type="text" id="username" name="username"
-										class="text" maxlength="20"><span><s:fielderror fieldName="username"></s:fielderror></span> </td>
+										class="text" maxlength="20"><span ><s:fielderror fieldName="username" ></s:fielderror></span>
+									<label id="usernameerror" style="color: red;"></label>	
+									</td>
 								</tr>
 								<tr>
 									<th><span class="requiredField">*</span>密&nbsp;&nbsp;码:</th>
@@ -160,12 +137,17 @@
 								</tr>
 								<tr>
 									<th><span class="requiredField">*</span>验证码:</th>
-									<td><span class="fieldSet"> <input type="text"
+									<td><span class="fieldSet"> 
+									<input type="text"
 											id="captcha" name="captcha" class="text captcha"
-											maxlength="4" autocomplete="off"><img
+											maxlength="4" autocomplete="off">
+											
+											<img 
 												id="captchaImage" class="captchaImage"
-												src="${pageContext.request.contextPath}/image/captcha.jhtml"
-												title="点击更换验证码"></span></td>
+												src="${pageContext.request.contextPath}/checkImgAction.action"
+												title="点击更换验证码"></span><input type='text' hidden="hidden" id='rightcheckcode' >
+												   <span style="color:red"><s:actionerror /></span> 
+												</td>
 								</tr>
 								<tr>
 									<th>&nbsp;</th>

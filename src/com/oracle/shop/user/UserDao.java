@@ -30,7 +30,16 @@ public interface UserDao {
 
 	/**
 	 * 用户登录
+	 * 
 	 * @param user
 	 */
 	public User login(User user) throws Exception;
+
+	/**
+	 * 根据用户名查找用户
+	 * @param username
+	 * @return
+	 * @throws Exception
+	 */
+	public User findUserByUserName(String username) throws Exception;
 }

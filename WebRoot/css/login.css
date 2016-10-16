@@ -49,7 +49,7 @@ div.login th {
 
 div.login .captcha {
 	width: 130px;
-	text-transform: uppercase;
+	/* text-transform: uppercase; */
 	ime-mode: disabled;
 }
 

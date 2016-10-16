@@ -1,0 +1,23 @@
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.oracle.shop.product.Product" table="product">
+		<id name="pid" column="pid" type="java.lang.Integer">
+			<generator class="native"></generator>
+		</id>
+		<!-- 普通属性-->
+		<property name="pname" column="pname" type="string"></property>
+		<property name="market_price" column="market_price" type="java.lang.Double"></property>
+		<property name="shop_price" column="shop_price" type="java.lang.Double"></property>
+		<property name="image" column="image" type="string"></property>
+		<property name="num" column="num" type="java.lang.Integer"></property>
+		<property name="pdesc" column="pdesc" type="string"></property>
+		<property name="is_hot" column="is_hot" type="java.lang.Integer"></property>
+		<property name="pdate" column="pdate" ></property>
+		
+		<!-- 所属二级 分类-->
+		<many-to-one name="categorySecond" class="com.oracle.shop.categorysecond.CategorySecond"
+			column="csid" cascade="save-update"></many-to-one>
+	</class>
+</hibernate-mapping>

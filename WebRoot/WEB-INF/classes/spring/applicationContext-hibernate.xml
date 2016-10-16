@@ -39,6 +39,9 @@
 		 <property name="mappingDirectoryLocations">
 			<list>
 				<value>classpath:com/oracle/shop/user</value>
+				<value>classpath:com/oracle/shop/catagory</value>
+				<value>classpath:com/oracle/shop/product</value>
+				<value>classpath:com/oracle/shop/categorysecond</value>
 			</list>
 		</property>
 	</bean>

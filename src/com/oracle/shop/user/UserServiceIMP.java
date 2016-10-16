@@ -59,13 +59,20 @@ public class UserServiceIMP implements UserService {
 
 	/**
 	 * 业务层 登录实现
-	 * @throws Exception 
+	 * 
+	 * @throws Exception
 	 */
 
 	@Override
 	public User login(User user) throws Exception {
 		return userdao.login(user);
 
+	}
+
+	@Override
+	public User findUserByUserName(String username) throws Exception {
+	
+		return userdao.findUserByUserName(username);
 	}
 
 }

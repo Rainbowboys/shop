@@ -74,13 +74,22 @@ public class UserDaoIMP extends HibernateDaoSupport implements UserDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public User login(User user) throws Exception {
-		List<User> list = (List<User>) this.getHibernateTemplate().find("from User where username=? and password=? and status=?",
-				user.getUsername(), user.getPassword(),1);
+		List<User> list = (List<User>) this.getHibernateTemplate().find(
+				"from User where username=? and password=? and status=?", user.getUsername(), user.getPassword(), 1);
 		if (list.size() > 0) {
 			return list.get(0);
 		}
 		return null;
+	}
 
+	@Override
+	public User findUserByUserName(String username) throws Exception {
+		@SuppressWarnings("unchecked")
+		List<User> list = (List<User>) this.getHibernateTemplate().find("from User where username=?", username);
+		if (list.size() > 0) {
+			return list.get(0);
+		}
+		return null;
 	}
 
 }
