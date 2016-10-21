@@ -12,7 +12,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.oracle.shop.catagory.Catagory;
 import com.oracle.shop.catagory.CatagoryService;
 import com.oracle.shop.categorysecond.CategorySecond;
+import com.oracle.shop.categorysecond.CategorySecondService;
 import com.oracle.shop.product.Product;
+import com.oracle.shop.product.ProductDao;
 import com.oracle.shop.product.ProductService;
 import com.oracle.shop.util.PageBean;
 
@@ -25,6 +27,10 @@ public class TestProduct {
 	private ProductService productService;
 	@Resource(name = "catagoryService")
 	private CatagoryService catagoryService;
+	@Resource(name="productdao")
+	private ProductDao productdao;
+	@Resource(name="categorySecondService")
+	private CategorySecondService categorySecondService;
 
 	@Test
 	public void testGetCategory() throws Exception {
@@ -49,6 +55,32 @@ public class TestProduct {
 		PageBean<Product> pageBean = productService.findProductByCid(1, 1);
 		System.out.println("ok");
 
+	}
+	@Test
+	public void testGetProductByPid() {
+		@SuppressWarnings("unused")
+	 	Product product= productService.findProductByPid(1);
+		System.out.println(product);
+		
+	}
+	@Test
+	public void testGetCountByCsid() {
+		@SuppressWarnings("unused")
+		Integer count = productdao.countProductByCsid(1);
+		System.out.println(count);
+		
+	}
+	@Test
+	public void testGetPageBeanByCsid() {
+		@SuppressWarnings("unused")
+		PageBean<Product> pageBean= productService.findProductBycsid(1, 1);
+		System.out.println(pageBean);
+	}
+	
+	@Test
+	public void testDelete(){
+		categorySecondService.deletecategorySecond(40);
+		
 	}
 
 }

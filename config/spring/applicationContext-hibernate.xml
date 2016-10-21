@@ -42,6 +42,8 @@
 				<value>classpath:com/oracle/shop/catagory</value>
 				<value>classpath:com/oracle/shop/product</value>
 				<value>classpath:com/oracle/shop/categorysecond</value>
+				<value>classpath:com/oracle/shop/order</value>
+				<value>classpath:com/oracle/shop/admin</value>
 			</list>
 		</property>
 	</bean>

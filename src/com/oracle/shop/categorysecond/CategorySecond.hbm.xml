@@ -12,12 +12,12 @@
 	
 		<!-- 配置关联关系(与一级分类的关联) -->
 		<many-to-one name="catagory" class="com.oracle.shop.catagory.Catagory"
-			column="cid" />
+			column="cid" lazy="false" />
 		<!-- 所属二级分类 -->
 		<!--一对多的关系映射 -->
 		<!-- name:对象属性名 -->
-		<set name="products" table="product" cascade="save-update,delete" lazy="false">
-			<!-- key:表示 一对多 多的一方的外键的名称 -->
+		<set name="products" table="product"  cascade="save-update,delete" lazy="false">
+			<!-- key:多的外键 -->
 			<key column="csid"></key>
 			<one-to-many class="com.oracle.shop.product.Product" />
 		</set>

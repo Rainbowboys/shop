@@ -114,7 +114,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 	public String login() throws Exception {
 		User loginuser = userservice.login(user);
 		if (loginuser != null) {
-			ActionContext.getContext().getSession().put(Contains.SESSION_USER_NAME, loginuser.getUsername());
+			ActionContext.getContext().getSession().put(Contains.SESSION_USER_NAME, loginuser);
 			return "loginsuccess";
 		} else {
 			ActionContext.getContext().put("loginresult", "用户名和密码不正确或者账户激活");

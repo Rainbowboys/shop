@@ -33,6 +33,31 @@ public interface ProductDao {
 	 * @return
 	 */
 
-	public List<Product> findProductByPage(int beginPage, int pageSize,int cid);
+	public List<Product> findProductByPage(int beginPage, int pageSize, int cid);
+
+	/**
+	 * 根据商品pid 查询商品详情
+	 * 
+	 * @param pid
+	 * @return
+	 */
+	public Product findProductByPid(Integer pid);
+
+	/**
+	 * 根据csid 查询商品数量
+	 * 
+	 * @param csid
+	 * @return
+	 */
+	public Integer countProductByCsid(Integer csid);
+
+	/**
+	 * 根据csid 查询商品
+	 * @param beginPage
+	 * @param pageSize
+	 * @param csid
+	 * @return
+	 */
+	public List<Product> findProductByPageAndCsId(int beginPage, int pageSize, Integer csid);
 
 }

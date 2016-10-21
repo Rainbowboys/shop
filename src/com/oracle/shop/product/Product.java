@@ -16,7 +16,6 @@ import com.oracle.shop.categorysecond.CategorySecond;
 public class Product {
 	// 商品id
 	private Integer pid;
-
 	private String pname;// 商品名称
 	private String image;// 商品图片
 	private Double market_price;// 指导价格

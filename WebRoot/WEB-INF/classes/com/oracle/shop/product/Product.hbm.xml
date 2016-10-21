@@ -18,6 +18,6 @@
 		
 		<!-- 所属二级 分类-->
 		<many-to-one name="categorySecond" class="com.oracle.shop.categorysecond.CategorySecond"
-			column="csid" cascade="save-update"></many-to-one>
+			column="csid" cascade="save-update" lazy="false"></many-to-one>
 	</class>
 </hibernate-mapping>

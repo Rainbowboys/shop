@@ -63,4 +63,30 @@ public class ProductDaoIMP extends HibernateDaoSupport implements ProductDao {
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public Product findProductByPid(Integer pid) {
+		List<Product> list = (List<Product>) this.getHibernateTemplate().find("from Product where pid=?", pid);
+
+		if (list.size() > 0) {
+			return list.get(0);
+		}
+		return null;
+	}
+
+	@Override
+	public Integer countProductByCsid(Integer csid) {
+		String hql = "select count(*) from Product p where p.categorySecond.csid=?";
+		List<Long> count = (List<Long>) this.getHibernateTemplate().find(hql, csid);
+		return count.get(0).intValue();
+	}
+
+	@Override
+	public List<Product> findProductByPageAndCsId(int beginPage, int pageSize, Integer csid) {
+		String hql = "select p from Product p where p.categorySecond.csid=?";
+		List<Product> list = this.getHibernateTemplate()
+				.execute(new PageHibernateCallBack<>(hql, new Object[] { csid }, beginPage, pageSize));
+		return list;
+	}
+
 }

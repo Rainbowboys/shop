@@ -15,8 +15,6 @@
 
 
 <div class="container index">
-		
-
 		<div class="span24">
 			<div id="hotProduct" class="hotProduct clearfix">
 					<div class="title">
@@ -38,7 +36,7 @@
 						<ul class="tabContent" style="display: block;">
 						<c:forEach var="item" items="${hotProduct}" >
 						             <li>
-										<a target="_blank"><img src="${pageContext.request.contextPath}/${item.image}" data-original="http://storage.shopxx.net/demo-image/3.0/201301/0ff130db-0a1b-4b8d-a918-ed9016317009-thumbnail.jpg" style="display: block;"></a>
+										<a href="${pageContext.request.contextPath}/product_findProductByPid?pid=${item.pid}" target="_blank"><img src="${pageContext.request.contextPath}/${item.image}"  style="display: block;"></a>
 									</li>
 						
 						</c:forEach>
@@ -47,7 +45,7 @@
 						<ul class="tabContent" style="display: none;">
 						<c:forEach var="item" items="${newProduct}" >
 							<li>
-										<a target="_blank"><img src="${pageContext.request.contextPath}/${item.image}" data-original="http://storage.shopxx.net/demo-image/3.0/201301/c5b1b396-181a-4805-9e68-9b400d71f91e-thumbnail.jpg" style="display: block;"></a>
+										<a href="${pageContext.request.contextPath}/product_findProductByPid?pid=${item.pid}" target="_blank"><img src="${pageContext.request.contextPath}/${item.image}"  style="display: block;"></a>
 									</li>
 						
 						</c:forEach>
@@ -83,7 +81,7 @@
 						 <ul class="tabContent" style="display: block;">
 						 <c:forEach var="item" items="${newProduct}" >
 							<li>
-										<a target="_blank"><img src="${pageContext.request.contextPath}/${item.image}" data-original="http://storage.shopxx.net/demo-image/3.0/201301/c5b1b396-181a-4805-9e68-9b400d71f91e-thumbnail.jpg" style="display: block;"></a>
+										<a href="${pageContext.request.contextPath}/product_findProductByPid?pid=${item.pid}" target="_blank"><img src="${pageContext.request.contextPath}/${item.image}" style="display: block;"></a>
 									</li>
 						
 						</c:forEach>

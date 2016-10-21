@@ -40,8 +40,9 @@ public class PageHibernateCallBack<T> implements HibernateCallback<List<T>> {
 			}
 
 		}
-
-		List<T> list = query.setFirstResult(startIndex).setMaxResults(pageSize + startIndex).list();
+		query.setFirstResult(startIndex);
+		query.setMaxResults(pageSize);
+		List<T> list = query.list();
 		return list;
 	}
 

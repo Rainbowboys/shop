@@ -48,4 +48,32 @@ public class ProductServiceIMP implements ProductService {
 		return pageBean;
 	}
 
+	@Override
+	public Product findProductByPid(Integer pid) {
+		return productDao.findProductByPid(pid);
+	}
+
+	@Override
+	public PageBean<Product> findProductBycsid(Integer csid, Integer page) {
+
+		int pageSize = 6;
+		int totalPage = 0;
+		PageBean<Product> pageBean = new PageBean<>();
+		pageBean.setCurrent_page(page);
+		pageBean.setLimit(pageSize);
+		// ×Ü¼ÇÂ¼Êý
+		Integer totalCount = productDao.countProductByCsid(csid);
+		pageBean.setTotalCount(totalCount);
+		if (totalCount % pageSize == 0) {
+			totalPage = totalCount / pageSize;
+		} else {
+			totalPage = totalCount / pageSize + 1;
+		}
+		pageBean.setTotalPage(totalPage);
+		int beginPage = (page - 1) * pageSize;
+		List<Product> products = productDao.findProductByPageAndCsId(beginPage, pageSize, csid);
+		pageBean.setList(products);
+		return pageBean;
+	}
+
 }

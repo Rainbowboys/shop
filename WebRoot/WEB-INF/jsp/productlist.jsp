@@ -25,11 +25,11 @@
 			 <c:forEach  var="categroy" items="${catagorylists}" >
 			            <dl>
 							<dt>
-								<a href="./image/蔬菜 - Powered By Mango Team.htm">${categroy.cname}</a>
+								<a href="${pageContext.request.contextPath }/product_findProductBycid.action?cid=${categroy.cid }&page=1">${categroy.cname}</a>
 							</dt>
 							<c:forEach items="${categroy.categorySecond}" var="categorySecond">
 							          <dd>
-										<a href="#" >${categorySecond.csname}</a>
+										<a  href="${pageContext.request.contextPath }/product_findProductBycsid.action?csid=${categorySecond.csid }&page=1" >${categorySecond.csname}</a>
 									</dd>
 							
 							</c:forEach>
@@ -45,13 +45,13 @@
 				<input type="hidden" id="orderType" name="orderType" value="">
 				<input type="hidden" id="pageNumber" name="pageNumber" value="1">
 				<input type="hidden" id="pageSize" name="pageSize" value="20">
-					
+				<!-- 商品显示 -->	
 				<div id="result" class="result table clearfix">
 						<ul>
 						 <c:forEach var="product" items="${pagebean.list}">
 						 
 						    <li>
-										<a href="./京华亿家分页面.htm">
+										<a href="${pageContext.request.contextPath}/product_findProductByPid?pid=${product.pid}">
 											<img src="${pageContext.request.contextPath}/${product.image}" width="170" height="170"  style="display: inline-block;">
 											   
 											<span style='color:green'>
@@ -67,13 +67,23 @@
 						</ul>
 				</div>
 	<div class="pagination">
-			<span class="firstPage">&nbsp;</span>
-			<span class="previousPage">&nbsp;</span>
-				<span class="currentPage">1</span>
-				<a href="javascript: $.pageSkip(2);">2</a>
-			<a class="nextPage" href="javascript: $.pageSkip(2);">&nbsp;</a>
-			
-			<a class="lastPage" href="javascript: $.pageSkip(2);">&nbsp;</a>
+			第${pagebean.current_page}/${pagebean.totalPage}页
+			<c:if test="${pagebean.totalPage!=1}">
+			  	<a href="${ pageContext.request.contextPath }/product_findProductBycid.action?cid=${catagorylists[0].cid }&page=1" class="firstPage">&nbsp;</a>		
+				<a href="${ pageContext.request.contextPath }/product_findProductBycid.action?cid=${catagorylists[0].cid }&page=${pagebean.current_page-1}" class="previousPage">&nbsp;</a>
+			</c:if>
+			<c:forEach var="i" begin="1" end="${pagebean.totalPage}" step="1">
+			   <c:if test="${pagebean.current_page==i}">
+			      <span class="currentPage">${i}</span>
+			   </c:if>
+			   <c:if test="${pagebean.current_page!=i}">
+			     <a href="${ pageContext.request.contextPath }/product_findProductBycid.action?cid=${catagorylists[0].cid }&page=${i}">${i }</a>
+			   </c:if>
+			</c:forEach>
+			<c:if test="${pagebean.totalPage!=pagebean.current_page }">
+				<a class="nextPage" href="${ pageContext.request.contextPath }/product_findProductBycid.action?cid=${catagorylists[0].cid }&page=${pagebean.current_page+1}">&nbsp;</a>
+				<a class="lastPage" href="${ pageContext.request.contextPath }/product_findProductBycid.action?cid=${catagorylists[0].cid }&page=${pagebean.current_page+1}">&nbsp;</a>
+			</c:if>
 	</div>
 			</form>
 		</div>

@@ -6,7 +6,11 @@
 <struts>
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
 	<constant name="struts.devMode" value="true" />
+	<constant name="struts.serve.static" value="false"></constant>
 	<package name="default" namespace="/" extends="struts-default">
+		<global-results>
+			<result name="loginPage">/WEB-INF/jsp/login.jsp</result>
+		</global-results>
 		<!-- 首页的配置 -->
 		<action name="indexAction" class="indexAction">
 			<result name="index">/WEB-INF/jsp/index.jsp</result>
@@ -19,16 +23,55 @@
 			<result name="activeresult">/WEB-INF/jsp/msgactive.jsp</result>
 			<result name="loginPage">/WEB-INF/jsp/login.jsp</result>
 			<result name="loginInput">/WEB-INF/jsp/login.jsp</result>
-			<result name="loginsuccess">/WEB-INF/jsp/index.jsp</result>
+			<result name="loginsuccess" type="redirectAction">indexAction</result>
 			<result name="quitSuccess" type="redirectAction">indexAction</result>
 		</action>
 		<action name="checkImgAction" class="checkImgAction"></action>
 		<action name="getCheckCode" class="checkImgAction" method="getCheckCode"></action>
 
-		<!-- 商品 -->
+		<!-- 商品 查询 -->
 
 		<action name="product_*" class="productAction" method="{1}">
 			<result name="findProductBycid">/WEB-INF/jsp/productlist.jsp</result>
+			<result name="productdesc">/WEB-INF/jsp/descpage.jsp</result>
+			<result name="productbycsid">/WEB-INF/jsp/productlistbycsid.jsp</result>
+		</action>
+
+		<!-- 购物车 -->
+		<action name="cart_*" class="CartAction" method="{1}">
+			<result name="addCartSuccess">/WEB-INF/jsp/cart.jsp</result>
+			<result name="clearCartSuccess">/WEB-INF/jsp/cart.jsp</result>
+			<result name="removeCartSuccess">/WEB-INF/jsp/cart.jsp</result>
+			<result name="lookCart">/WEB-INF/jsp/cart.jsp</result>
+		</action>
+
+		<!-- 订单 -->
+		<action name="order_*" class="OrderAction" method="{1}">
+			<result name="savaOrdersuccess">/WEB-INF/jsp/order.jsp</result>
+			<result name="payPage">/WEB-INF/jsp/order.jsp</result>
+			<result name="cartMessage">/WEB-INF/jsp/msg.jsp</result>
+			<result name="userMessage">/WEB-INF/jsp/msg.jsp</result>
+			<result name="paySuccess">/WEB-INF/jsp/paymsg.jsp</result>
+			<result name="myorders">/WEB-INF/jsp/myorderlist.jsp</result>
+			<result name="deleteSuccess" type="redirectAction">order_findMyOrders.action
+			</result>
+		</action>
+
+		<!-- 后台管理 -->
+
+		<action name="admin_*" class="adminUserAction" method="{1}">
+			<result name="loginFaild">/admin/login.jsp</result>
+			<result name="loginSuccess">/admin/home.jsp</result>
+		</action>
+
+		<!-- 后台一级分类管理 -->
+		<action name="category_*" class="catagoryAction" method="{1}">
+			<result name="categoryPage">/WEB-INF/jsp/admin/list.jsp</result>
+		</action>
+		<!-- 后台二级分类管理 -->
+		<action name="categorysecond_*" class="categorySecondAction"
+			method="{1}">
+			<result name="categorysecondPage">/WEB-INF/jsp/admin/secondlist.jsp</result>
 		</action>
 	</package>
 </struts>
